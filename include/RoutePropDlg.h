@@ -36,6 +36,7 @@
 #include <wx/statbox.h>
 #include <wx/notebook.h>
 #include <wx/frame.h>
+#include <wx/checkbox.h>
 
 #ifdef __WXGTK__
 //wxTimePickerCtrl is completely broken in Gnome based desktop environments as of wxGTK 3.0
@@ -55,6 +56,7 @@ class RoutePropDlg : public wxFrame
 	protected:
 		wxNotebook* m_ntbRteProp;
 		wxPanel* m_pnlBasic;
+		wxCheckBox* m_cbDefaultRoute;
 		wxStaticText* m_stName;
 		wxTextCtrl* m_tcName;
 		wxStaticText* m_stFrom;

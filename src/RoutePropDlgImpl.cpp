@@ -500,6 +500,7 @@ void RoutePropDlgImpl::SetRouteAndUpdate( Route *pR, bool only_points )
         
         // Reorganize dialog for route or track display
         m_tcName->SetValue( m_pRoute->m_RouteNameString );
+        m_cbDefaultRoute->SetValue( m_pRoute->m_bDefaultRoute);
         m_tcFrom->SetValue( m_pRoute->m_RouteStartString );
         m_tcTo->SetValue( m_pRoute->m_RouteEndString );
         m_tcDescription->SetValue( m_pRoute->m_RouteDescription );
@@ -806,6 +807,29 @@ void RoutePropDlgImpl::ResetChanges()
 void RoutePropDlgImpl::SaveChanges()
 {
     if( m_pRoute && !m_pRoute->m_bIsInLayer ) {
+        if (m_cbDefaultRoute->IsChecked()) {
+            // check the route was not default before
+            if ( ! m_pRoute->m_bDefaultRoute ) {
+                if( wxID_YES == OCPNMessageBox( NULL,
+                                _("You are about to set this route as the default one. Default route is activated on startup\nDoing so will cancel any previous default route.\nAre you sure you want to proceed ?"),
+                                wxString( _("Default route") ),
+                                wxICON_WARNING | wxYES_NO, 30 ) ) {
+                    g_pRouteMan->SetDefaultRoute(m_pRoute);
+                }
+            }
+        } else {
+            // check if route was default before editing
+            if ( m_pRoute->m_bDefaultRoute ) {
+                if ( wxID_YES == OCPNMessageBox (
+                                 NULL,
+                                 _("You are about to cancel the default route. No default route will be activated on startup\nAre you sure you want to proceed ?"),
+                                 wxString( _("Default route") ),
+                                 wxICON_WARNING | wxYES_NO, 30 ) ) {
+                     g_pRouteMan->SetDefaultRoute(NULL) == false;
+                }
+            }
+        }
+
         //  Get User input Text Fields
         m_pRoute->m_RouteNameString = m_tcName->GetValue();
         m_pRoute->m_RouteStartString = m_tcFrom->GetValue();

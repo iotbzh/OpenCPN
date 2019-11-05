@@ -52,6 +52,7 @@ WX_DEFINE_LIST ( RouteList );
 
 Route::Route()
 {
+    m_bDefaultRoute = false;
     m_bRtIsSelected = false;
     m_bRtIsActive = false;
     m_pRouteActivePoint = NULL;

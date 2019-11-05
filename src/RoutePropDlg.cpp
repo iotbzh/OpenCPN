@@ -27,9 +27,13 @@ RoutePropDlg::RoutePropDlg( wxWindow* parent, wxWindowID id, const wxString& tit
 	wxBoxSizer* bSizerData;
 	bSizerData = new wxBoxSizer( wxVERTICAL );
 
-	wxBoxSizer* bSizerName;
-	bSizerName = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* bSizerDefaultRoute = new wxBoxSizer( wxHORIZONTAL );
+	m_cbDefaultRoute = new wxCheckBox(  m_pnlBasic, wxID_ANY, _("Default Route"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizerDefaultRoute->Add(m_cbDefaultRoute , 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
 
+	bSizerData->Add( bSizerDefaultRoute, 0, wxEXPAND, 5 );
+
+	wxBoxSizer* bSizerName = new wxBoxSizer( wxHORIZONTAL );
 	m_stName = new wxStaticText( m_pnlBasic, wxID_ANY, _("Name"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_stName->Wrap( -1 );
 	bSizerName->Add( m_stName, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );

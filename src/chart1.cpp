@@ -6840,6 +6840,9 @@ void MyFrame::OnInitTimer(wxTimerEvent& event)
 
             console = new ConsoleCanvas( gFrame );                    // the console
             console->SetColorScheme( global_color_scheme );
+            //Must be after console init, other wise crashes
+            g_pRouteMan->ActivateDefaultRoute();
+
             break;
 
         case 2:

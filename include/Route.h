@@ -120,6 +120,7 @@ public:
       bool        m_bIsBeingEdited;
       double      m_route_length;
       double      m_route_time;
+      bool        m_bDefaultRoute;
       wxString    m_RouteNameString;
       wxString    m_RouteStartString;
       wxString    m_RouteEndString;

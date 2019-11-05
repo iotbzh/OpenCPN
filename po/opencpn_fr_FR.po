@@ -6832,3 +6832,35 @@ msgstr "Toujours voir"
 msgid "Show only at scale"
 msgstr "Afficher uniquement à l'échelle"
 
+#: src/RoutePropDlgImpl.cpp:814
+msgid "You are about to set this route as the default one. Default route is activated on startup\n"
+"Doing so will cancel any previous default route.\n"
+"Are you sure you want to proceed ?"
+msgstr "La route va être définie comme Route par Défault\n"
+"Ceci annulera toute route par défaut définie précédement\n"
+"Confirmer la modification ?"
+
+#: src/RoutePropDlgImpl.cpp:825
+msgid "You are about to cancel the default route. No default route will be activated on startup\n"
+"Are you sure you want to proceed ?"
+msgstr "La route par défaut va être supprimé. Aucune route ne sera activée au prochain démarrage.\n"
+"Confirmer la modification ?"
+
+#: src/RoutePropDlgImpl.cpp:815 src/RoutePropDlgImpl.cpp:826
+msgid "Default route"
+msgstr "Route par défaut"
+
+#: src/routeman.cpp:312
+msgid "Default Route is not unique. Can't activate multiple default routes.\n"
+"All default route will be canceled"
+msgstr "La route par defaut n'est pas unique. Impossible d'activater la route par défaut.\n"
+"Les routes par défaut vont toutes être annulées"
+
+#: src/routeman.cpp:312
+msgid "Multiple default routes"
+msgstr "Routes par défaut multiples"
+
+#: src:RoutePropDlg.cpp:77
+msgid "Default Route"
+msgstr "Route par défaut"
+

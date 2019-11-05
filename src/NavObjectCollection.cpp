@@ -503,7 +503,11 @@ static Route *GPXLoadRoute1( pugi::xml_node &wpt_node, bool b_fullviz,
                     if( ext_name == _T ( "opencpn:end" ) ) {
                         pTentRoute->m_RouteEndString = wxString::FromUTF8(ext_child.first_child().value());
                     }
-                        
+                    else
+                    if ( ext_name == _T ( "opencpn:default_route" ) ) {
+                        wxString dr = wxString::FromUTF8(ext_child.first_child().value());
+                        pTentRoute->m_bDefaultRoute = ( dr == _T("1") );
+                    }
                     else
                     if( ext_name == _T ( "opencpn:viz" ) ) {
                                 wxString viz = wxString::FromUTF8(ext_child.first_child().value());
@@ -1014,6 +1018,9 @@ static bool GPXCreateRoute( pugi::xml_node node, Route *pRoute )
     child = child_ext.append_child("opencpn:viz");
     child.append_child(pugi::node_pcdata).set_value(pRoute->IsVisible() == true ? "1" : "0");
     
+    child = child_ext.append_child("opencpn:default_route");
+    child.append_child(pugi::node_pcdata).set_value(pRoute->m_bDefaultRoute ? "1" : "0");
+
     if( pRoute->m_RouteStartString.Len() ) {
         wxCharBuffer buffer=pRoute->m_RouteStartString.ToUTF8();
         if(buffer.data()) {

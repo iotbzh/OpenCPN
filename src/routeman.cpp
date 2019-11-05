@@ -280,6 +280,51 @@ RoutePoint *Routeman::FindBestActivatePoint( Route *pR, double lat, double lon, 
     return best_point;
 }
 
+bool Routeman::SetDefaultRoute(Route *defaultRoute) {
+    bool found = false;
+
+    wxRouteListNode *node = pRouteList->GetFirst();
+    while( node ) {
+        Route *pRoute = node->GetData();
+        if (pRoute == defaultRoute) {
+            pRoute->m_bDefaultRoute = true;
+            found = true;
+        } else {
+            pRoute->m_bDefaultRoute = false;
+        }
+        node = node->GetNext();
+    }
+    return found;
+}
+
+
+wxString Routeman::ActivateDefaultRoute() {
+    wxRouteListNode *node = pRouteList->GetFirst();
+    Route *toActivate = NULL;
+
+    while( node ) {
+        Route *pRoute = node->GetData();
+
+        if ( pRoute->m_bDefaultRoute) {
+            if (toActivate) {
+                OCPNMessageBox ( NULL, _("Default Route is not unique. Can't activate multiple default routes.\nAll default route will be canceled"), wxString( _("Multiple default routes") ), wxICON_ERROR | wxOK, 30 );
+                SetDefaultRoute(NULL);
+                return "";
+            } else {
+                toActivate = pRoute;
+            }
+        }
+        node = node->GetNext();
+    }
+
+    if (toActivate) {
+        ActivateRoute( toActivate );
+        return toActivate->m_GUID;
+    } else {
+    }
+    return "";
+}
+
 bool Routeman::ActivateRoute( Route *pRouteToActivate, RoutePoint *pStartPoint )
 {
     wxJSONValue v;
